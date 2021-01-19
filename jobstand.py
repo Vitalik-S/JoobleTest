@@ -35,6 +35,8 @@ class JobFeaturePreprocess:
         self._scaler = scaler
 
     def preprocess_data(self) -> pd.DataFrame:
+        #При использовании модуля в будущем планируется добавление факторов новых типов (в нашем тесте только признаки типа “2”)
+        #Если я правильно понял этот пункт, то добавление нового типа означает, что может быть другой файл где будет только тип "3" - 512 float чисел к примеру
         test_data = pd.read_csv(self._test_data_path, sep='\t', chunksize=100000)
         test_data = pd.concat(test_data)
         test_data_np = np.delete(np.array(test_data['features'].str.split(',', expand=True).astype(float)), 0, 1)
